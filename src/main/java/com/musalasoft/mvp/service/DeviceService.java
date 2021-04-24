@@ -29,7 +29,15 @@ public class DeviceService {
 
     public Device addDeviceToGateway(Long gatewayId, Device device) {
         Optional<Gateway> gateway = gatewayRepository.findById(gatewayId);
+        
         if (gateway.isPresent()) {
+
+            Long numberOfDevices = deviceRepository.countByGatewayId(gatewayId);
+            if (numberOfDevices >= 10) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "No more than 10 peripheral devices are allowed for a gateway");
+            }
+
             device.setGateway(gateway.get());
             return deviceRepository.save(device);
         } else {

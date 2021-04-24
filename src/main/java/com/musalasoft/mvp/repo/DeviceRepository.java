@@ -13,4 +13,6 @@ public interface DeviceRepository extends JpaRepository<Device, Long> {
     Page<Device> findByGatewayId(Long gatewayId, Pageable pageable);
 
     Optional<Device> findByIdAndGatewayId(Long deviceId, Long gatewayId);
+
+    Long countByGatewayId(Long gatewayId);
 }
