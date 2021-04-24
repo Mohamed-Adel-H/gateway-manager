@@ -3,6 +3,7 @@ package com.musalasoft.mvp.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 @Entity
 public class Gateway {
@@ -10,17 +11,20 @@ public class Gateway {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @NotBlank
     @Column(nullable = false, unique = true)
     private String serialNumber;
-
     @NotBlank
     private String name;
-
     @Pattern(regexp = "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$",
             message = "IP address should follow IPv4 standard")
     private String ipv4;
+    @OneToMany(mappedBy = "gateway")
+    private Set<Device> devices;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getSerialNumber() {
         return serialNumber;
