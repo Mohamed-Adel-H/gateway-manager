@@ -1,13 +1,11 @@
-# gateway-manager
+# Gateway Manager
 
-### Create DB and user and assign user as admin to this db
+You need to have Mysql installed on your machine and running then run
 
-- create database musala;
+```bash
+mvn spring-boot:run
+```
 
-- create user 'musalauser'@'%' identified by '12345';
+You will find the swagger file with all the APIs, then go to this url:
 
-- grant all on musala.* to 'musalauser'@'%';
-
-Get swagger file check to see all apis provivded
-
-- http://localhost:8080/swagger-ui.html
+- http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/gateway-controller
