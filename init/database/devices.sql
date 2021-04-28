@@ -1,3 +1,4 @@
+# Devices
 INSERT INTO musala.device (id, created, status, uid, vendor, gateway_id)
 VALUES (1, '2021-04-24 08:48:47.892000', 'online', 1000, 'Vendor 1', 1);
 INSERT INTO musala.device (id, created, status, uid, vendor, gateway_id)

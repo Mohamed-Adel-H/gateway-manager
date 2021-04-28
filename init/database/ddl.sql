@@ -1,5 +1,16 @@
-DROP DATABASE IF EXISTS musala;
-CREATE DATABASE musala;
+DROP
+DATABASE IF EXISTS musala;
+CREATE
+DATABASE musala;
+
+CREATE
+USER 'musalauser'@'localhost' IDENTIFIED BY '12345';
+
+GRANT ALL PRIVILEGES ON * . * TO
+'musalauser'@'localhost';
+FLUSH
+PRIVILEGES;
+
 
 create table musala.gateway
 (
@@ -21,3 +32,4 @@ create table musala.device
     constraint UK_bym2ir5cd5feay02tryi5dv1a unique (uid),
     constraint FKq1cskqsy9nxmn4syxncvk1s0o foreign key (gateway_id) references gateway (id)
 );
+
