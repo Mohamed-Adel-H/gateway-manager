@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/gateways")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class GatewayController {
 
     private final GatewayService gatewayService;

@@ -29,7 +29,7 @@ public class DeviceService {
 
     public Device addDeviceToGateway(Long gatewayId, Device device) {
         Optional<Gateway> gateway = gatewayRepository.findById(gatewayId);
-        
+
         if (gateway.isPresent()) {
 
             Long numberOfDevices = deviceRepository.countByGatewayId(gatewayId);
@@ -39,7 +39,13 @@ public class DeviceService {
             }
 
             device.setGateway(gateway.get());
-            return deviceRepository.save(device);
+            try {
+                return deviceRepository.save(device);
+            } catch (Exception e) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Duplicate Device UID" + device.getUid());
+            }
+
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gateway with id " + gatewayId + " not found");
         }

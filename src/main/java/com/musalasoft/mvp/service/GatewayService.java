@@ -33,7 +33,12 @@ public class GatewayService {
     public ResponseEntity<Object> deleteGateway(Long gatewayId) {
         Optional<Gateway> gateway = gatewayRepository.findById(gatewayId);
         if (gateway.isPresent()) {
-            gatewayRepository.delete(gateway.get());
+            try {
+                gatewayRepository.delete(gateway.get());
+            } catch (Exception e) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot Delete Gateway with id " +
+                        gatewayId + " please check if still has devices");
+            }
             return ResponseEntity.ok().build();
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gateway with id " + gatewayId + " not found");

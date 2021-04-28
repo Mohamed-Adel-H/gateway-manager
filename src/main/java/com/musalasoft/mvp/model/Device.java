@@ -13,22 +13,25 @@ public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column(nullable = false)
     private Long uid;
-
     @NotBlank
     private String vendor;
-
     @CreationTimestamp
     private Date created;
-
     @Pattern(regexp = "^online|offline$", message = "Status must be 'online' or 'offline'")
     private String status;
-
     @ManyToOne
     @JoinColumn(nullable = false, updatable = false)
     private Gateway gateway;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getUid() {
         return uid;
